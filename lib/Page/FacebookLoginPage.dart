@@ -13,13 +13,14 @@ class FacebookLoginPageState extends State<FacebookLoginPage>{
   bool _isLoggedIn = false;
   Map _userObj = {};
 
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: new Scaffold(
         appBar: AppBar(
-          title: Text("Codesundar"),
+          title: Text("Facebook Login"),
         ),
         body: Container(
           child: _isLoggedIn

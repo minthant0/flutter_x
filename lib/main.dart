@@ -1,10 +1,13 @@
 import 'dart:async';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_x/Page/CardView.dart';
 import 'package:flutter_x/Page/CollapsingToolbarPage.dart';
 import 'package:flutter_x/Page/FacebookLoginPage.dart';
+import 'package:flutter_x/Page/FirebaseNotiPage.dart';
 import 'package:flutter_x/Page/ImageUpload.dart';
 import 'package:flutter_x/Page/LoginPage.dart';
 import 'package:flutter_x/Obj/CardData.dart';
@@ -67,8 +70,14 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
   var text = ["Card View","Login UI","Retrofit API","Shared Preference","Image Upload","Login and Register",
-               "CollapsingToolbar","Facebook Login"];
-  
+               "CollapsingToolbar","Facebook Login","Firebase Notification"];
+
+
+  @override
+  void initState() {
+    super.initState();
+
+  }
 
 
   @override
@@ -82,6 +91,7 @@ class _MyHomePageState extends State<MyHomePage> {
             accentColor: Colors.red),
         debugShowCheckedModeBanner: false,
         home: new Scaffold(
+
             appBar: new AppBar(
               title: new Text(
                 "FlutterX",
@@ -143,6 +153,11 @@ class _MyHomePageState extends State<MyHomePage> {
                              Navigator.push(
                                context,
                                MaterialPageRoute(builder: (context) => FacebookLoginPage()),
+                             );
+                           }else if(position==8){
+                             Navigator.push(
+                               context,
+                               MaterialPageRoute(builder: (context) => FirebaseNotiPage()),
                              );
                            }
                          },
