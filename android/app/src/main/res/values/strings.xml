@@ -10,4 +10,7 @@
       **NOTE**: The scheme needs to start with `fb` and then your ID.
     -->
     <string name="fb_login_protocol_scheme">fb510255616677538</string>
+    <string name="google_map_api_key">AIzaSyBX2dQ54DsPhkKG24oTZapVsCZGgD9bnTw</string>
+
+
 </resources>
