@@ -27,7 +27,7 @@ class BottomNavigationPageState extends State<BottomNavigationPage>{
   Widget _selectedPage() {
     switch (_selectedIndex) {
       case 0:
-        return ComeSoonPage();
+        return TabBarPage();
         break;
       case 1:
         return RetrofitPage();
@@ -159,6 +159,37 @@ class ProfileView extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class TabBarPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: DefaultTabController(
+        length: 3,
+        child: Scaffold(
+          appBar: AppBar(
+            title: new Text("Home"),
+            bottom: TabBar(
+              tabs: [
+                Tab(icon: Icon(Icons.directions_car)),
+                Tab(icon: Icon(Icons.directions_transit)),
+                Tab(icon: Icon(Icons.directions_bike)),
+              ],
+            ),
+          ),
+          body: TabBarView(
+            children: [
+              Icon(Icons.directions_car),
+              Icon(Icons.directions_transit),
+              Icon(Icons.directions_bike),
+            ],
+          ),
+        ),
       ),
     );
   }
