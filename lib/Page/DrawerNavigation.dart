@@ -181,7 +181,7 @@ class NotificationView extends StatelessWidget {
             padding: const EdgeInsets.only(top: 32.0),
             child: Column(
               children: <Widget>[
-                Text('Hello Bhupesh!!!'),
+                Text('Min Thant Tun!!!'),
                 Padding(
                   padding:
                   const EdgeInsets.only(top: 22.0, left: 42.0, right: 42.0),
@@ -195,6 +195,7 @@ class NotificationView extends StatelessWidget {
     );
   }
 }
+
 class ProfileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -240,7 +241,7 @@ class ProfileView extends StatelessWidget {
             padding: const EdgeInsets.only(top: 32.0),
             child: Column(
               children: <Widget>[
-                Text('Hello Bhupesh!!!'),
+                Text('Min Thant Tun!!!'),
                 Padding(
                   padding:
                   const EdgeInsets.only(top: 22.0, left: 42.0, right: 42.0),
@@ -254,6 +255,7 @@ class ProfileView extends StatelessWidget {
     );
   }
 }
+
 class ClippingClass extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
