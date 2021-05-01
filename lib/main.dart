@@ -13,9 +13,10 @@ import 'package:flutter_x/Page/FIrebaseOtpPage.dart';
 import 'package:flutter_x/Page/FacebookLoginPage.dart';
 import 'package:flutter_x/Page/FirebaseNotiPage.dart';
 import 'package:flutter_x/Page/ImageUpload.dart';
-import 'package:flutter_x/Page/LoginPage.dart';
+import 'package:flutter_x/Page/Login.dart';
 import 'package:flutter_x/Obj/CardData.dart';
 import 'package:flutter_x/Page/LoginRegisterPage.dart';
+import 'package:flutter_x/Page/LoginUi.dart';
 import 'package:flutter_x/Page/RetrofitPage.dart';
 import 'package:flutter_x/Page/SharedPreference.dart';
 import 'package:flutter_x/Page/google_map_picker.dart';
@@ -129,7 +130,7 @@ class _MyHomePageState extends State<MyHomePage> {
                            }else if(position==1){
                              Navigator.push(
                                context,
-                               MaterialPageRoute(builder: (context) => LoginPage()),
+                               MaterialPageRoute(builder: (context) => LoginUiPage()),
                              );
                            }else if(position==2){
                              Navigator.push(
