@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:connectivity/connectivity.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -14,6 +15,7 @@ import 'package:flutter_x/Page/FIrebaseOtpPage.dart';
 import 'package:flutter_x/Page/FacebookLoginPage.dart';
 import 'package:flutter_x/Page/FirebaseNotiPage.dart';
 import 'package:flutter_x/Page/ImageUpload.dart';
+import 'package:flutter_x/Page/InternetConnectivity.dart';
 import 'package:flutter_x/Page/Login.dart';
 import 'package:flutter_x/Obj/CardData.dart';
 import 'package:flutter_x/Page/LoginRegisterPage.dart';
@@ -22,6 +24,7 @@ import 'package:flutter_x/Page/RetrofitPage.dart';
 import 'package:flutter_x/Page/SharedPreference.dart';
 import 'package:flutter_x/Page/google_map_picker.dart';
 import 'package:flutter_x/phone_auth/get_phone.dart';
+import 'package:provider/provider.dart';
 
 import 'Page/ProductBox.dart';
 
@@ -38,36 +41,24 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
-      ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
-    );
+    return MultiProvider(
+        providers: [
+          StreamProvider(
+              create: (context) => Connectivity().onConnectivityChanged),
+        ],
+        child: MaterialApp(
+          title: 'FlutterX',
+          theme: ThemeData(
+            primarySwatch: Colors.blue,
+          ),
+          home: MyHomePage(title: 'FlutterX'),
+        ));
+
   }
 }
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
 
   final String title;
 
@@ -80,7 +71,7 @@ class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
   var text = ["Card View","Login UI","Retrofit API","Shared Preference","Image Upload","Login and Register",
                "CollapsingToolbar","Facebook Login","Firebase Notification","Firebase OTP","Google Map Picker",
-                "Sqlite Note","Drawer Navigation","Bottom Navigation","Image Slider"];
+                "Sqlite Note","Drawer Navigation","Bottom Navigation","Image Slider","Internet Condition"];
 
 
   @override
@@ -198,6 +189,11 @@ class _MyHomePageState extends State<MyHomePage> {
                              Navigator.push(
                                context,
                                MaterialPageRoute(builder: (context) => CarouselSliderPage()),
+                             );
+                           }else if(position==15){
+                             Navigator.push(
+                               context,
+                               MaterialPageRoute(builder: (context) => InternetConditionPage()),
                              );
                            }
                          },
