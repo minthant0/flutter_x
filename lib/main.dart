@@ -5,6 +5,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_x/Lng/LngPage.dart';
+import 'package:flutter_x/Lng/app_setting.dart';
+import 'package:flutter_x/Lng/lacalization/app_localization.dart';
+import 'package:flutter_x/Lng/lacalization/localization_constants.dart';
+import 'package:flutter_x/Lng/language.dart';
 import 'package:flutter_x/Note/NotePage.dart';
 import 'package:flutter_x/Page/BottomNavigation.dart';
 import 'package:flutter_x/Page/CardView.dart';
@@ -24,6 +30,7 @@ import 'package:flutter_x/Page/RetrofitPage.dart';
 import 'package:flutter_x/Page/SharedPreference.dart';
 import 'package:flutter_x/Page/google_map_picker.dart';
 import 'package:flutter_x/phone_auth/get_phone.dart';
+import 'package:flutter_x/themes/theme.dart';
 import 'package:provider/provider.dart';
 
 import 'Page/ProductBox.dart';
@@ -43,6 +50,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
         providers: [
+          ChangeNotifierProvider(create: (context) => AppSetting()),
           StreamProvider(
               create: (context) => Connectivity().onConnectivityChanged),
         ],
@@ -71,7 +79,7 @@ class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
   var text = ["Card View","Login UI","Retrofit API","Shared Preference","Image Upload","Login and Register",
                "CollapsingToolbar","Facebook Login","Firebase Notification","Firebase OTP","Google Map Picker",
-                "Sqlite Note","Drawer Navigation","Bottom Navigation","Image Slider","Internet Condition"];
+                "Sqlite Note","Drawer Navigation","Bottom Navigation","Image Slider","Internet Condition","Language"];
 
 
   @override
@@ -83,129 +91,160 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    return Consumer<AppSetting>(builder: (context, appSetting, child) {
+      return new MaterialApp(
+          locale: appSetting.currentLanguage(),
+          darkTheme: AppTheme.darkTheme,
+          themeMode: appSetting.currentTheme(),
+          //theme: AppTheme.lightTheme,
+          title: "Home Screen",
+          theme: new ThemeData(
+              primaryColor: Colors.blue,
+              primarySwatch: Colors.blue,
+              accentColor: Colors.red),
 
-    return new MaterialApp(
-        title: "Home Screen",
-        theme: new ThemeData(
-            primaryColor: Colors.blue,
-            primarySwatch: Colors.blue,
-            accentColor: Colors.red),
-        debugShowCheckedModeBanner: false,
-        home: new Scaffold(
+          supportedLocales: Language.languageList()
+              .map((language) =>
+              Locale(language.languageCode, language.countryCode))
+              .toList(),
+          localizationsDelegates: [
+            AppLocalization.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+          ],
+          localeResolutionCallback: (deviceLocale, supportedLocale) {
+            for (var locale in supportedLocale) {
+              if (locale.languageCode == deviceLocale.languageCode &&
+                  locale.countryCode == deviceLocale.countryCode) {
+                return deviceLocale;
+              }
+            }
+            return supportedLocale.first;
+          },
 
-            appBar: new AppBar(
-              title: new Text(
-                "FlutterX",
-                style: new TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold),
+
+          debugShowCheckedModeBanner: false,
+          home: new Scaffold(
+
+              appBar: new AppBar(
+                title: new Text(
+                  "FlutterX",
+                  style: new TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold),
+                ),
               ),
-            ),
 
-            body: ListView.builder(
-              /*shrinkWrap: true,
+              body: ListView.builder(
+                /*shrinkWrap: true,
               padding: const EdgeInsets.fromLTRB(2.0, 10.0, 2.0, 10.0),*/
-              itemCount: text.length,
-              itemBuilder: (BuildContext context, int position) {
+                itemCount: text.length,
+                itemBuilder: (BuildContext context, int position) {
 
-                 return Container(
-                     padding: EdgeInsets.all(3),
-                     height: 100,
-                     child: Card(
-                       child: new InkWell(
-                         onTap: (){
-                           if(position==0){
-                             Navigator.push(
-                               context,
-                               MaterialPageRoute(builder: (context) => CardView()),
-                             );
-                           }else if(position==1){
-                             Navigator.push(
-                               context,
-                               MaterialPageRoute(builder: (context) => LoginUiPage()),
-                             );
-                           }else if(position==2){
-                             Navigator.push(
-                               context,
-                               MaterialPageRoute(builder: (context) => RetrofitPage()),
-                             );
-                           }else if(position==3){
-                             Navigator.push(
-                               context,
-                               MaterialPageRoute(builder: (context) => SharedPreferencePage()),
-                             );
-                           }else if(position==4){
-                             Navigator.push(
-                               context,
-                               MaterialPageRoute(builder: (context) => ImageUploadPage()),
-                             );
-                           }else if(position==5){
-                             Navigator.push(
-                               context,
-                               MaterialPageRoute(builder: (context) => LoginRegisterPage()),
-                             );
-                           }else if(position==6){
-                             Navigator.push(
-                               context,
-                               MaterialPageRoute(builder: (context) => CollapsingToolbarPage()),
-                             );
-                           }else if(position==7){
-                             Navigator.push(
-                               context,
-                               MaterialPageRoute(builder: (context) => FacebookLoginPage()),
-                             );
-                           }else if(position==8){
-                             Navigator.push(
-                               context,
-                               MaterialPageRoute(builder: (context) => FirebaseNotiPage()),
-                             );
-                           }else if(position==9){
-                             Navigator.push(
-                               context,
-                               MaterialPageRoute(builder: (context) => FirebaseOtpPage()),
-                             );
-                           }else if(position==10){
-                             Navigator.push(
-                               context,
-                               MaterialPageRoute(builder: (context) => GoogleMapPickerPage()),
-                             );
-                           }else if(position==11){
-                             Navigator.push(
-                               context,
-                               MaterialPageRoute(builder: (context) => NotePage()),
-                             );
-                           }else if(position==12){
-                             Navigator.push(
-                               context,
-                               MaterialPageRoute(builder: (context) => DrawerNavigationPage()),
-                             );
-                           }else if(position==13){
-                             Navigator.push(
-                               context,
-                               MaterialPageRoute(builder: (context) => BottomNavigationPage()),
-                             );
-                           }else if(position==14){
-                             Navigator.push(
-                               context,
-                               MaterialPageRoute(builder: (context) => CarouselSliderPage()),
-                             );
-                           }else if(position==15){
-                             Navigator.push(
-                               context,
-                               MaterialPageRoute(builder: (context) => InternetConditionPage()),
-                             );
-                           }
-                         },
-                         child: Row(
-                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                             children: <Widget>[
-                               Text(text[position],style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold)),
-                             ]))));
-               },
-            ))
-    );
+                  return Container(
+                      padding: EdgeInsets.all(3),
+                      height: 100,
+                      child: Card(
+                          child: new InkWell(
+                              onTap: (){
+                                if(position==0){
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => CardView()),
+                                  );
+                                }else if(position==1){
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => LoginUiPage()),
+                                  );
+                                }else if(position==2){
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => RetrofitPage()),
+                                  );
+                                }else if(position==3){
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => SharedPreferencePage()),
+                                  );
+                                }else if(position==4){
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => ImageUploadPage()),
+                                  );
+                                }else if(position==5){
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => LoginRegisterPage()),
+                                  );
+                                }else if(position==6){
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => CollapsingToolbarPage()),
+                                  );
+                                }else if(position==7){
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => FacebookLoginPage()),
+                                  );
+                                }else if(position==8){
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => FirebaseNotiPage()),
+                                  );
+                                }else if(position==9){
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => FirebaseOtpPage()),
+                                  );
+                                }else if(position==10){
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => GoogleMapPickerPage()),
+                                  );
+                                }else if(position==11){
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => NotePage()),
+                                  );
+                                }else if(position==12){
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => DrawerNavigationPage()),
+                                  );
+                                }else if(position==13){
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => BottomNavigationPage()),
+                                  );
+                                }else if(position==14){
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => CarouselSliderPage()),
+                                  );
+                                }else if(position==15){
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => InternetConditionPage()),
+                                  );
+                                }else if(position==16){
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => LngPage()),
+                                  );
+                                }
+                              },
+                              child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  children: <Widget>[
+                                    Text(text[position],style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold)),
+                                  ]))));
+                },
+              ))
+      );
+    });
   }
-
 
 }
