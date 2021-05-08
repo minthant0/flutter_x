@@ -56,10 +56,10 @@ dependencies:
   firebase_messaging: ^6.0.8
   google_fonts: ^0.3.9
 
-
   #Note db
   sqflite: ^2.0.0+3
 
+  fluttertoast: ^8.0.6
 
 
   # The following adds the Cupertino Icons font to your application.

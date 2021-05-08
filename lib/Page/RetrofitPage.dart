@@ -3,6 +3,7 @@ import 'package:connectivity_widget/connectivity_widget.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 
 import '../data/post_api_service.dart';
@@ -26,6 +27,12 @@ class RetrofitPageState extends State<RetrofitPage> {
     });
   }
 
+  void Show_Toast(){
+    Fluttertoast.showToast(msg: "No Internet",toastLength: Toast.LENGTH_SHORT, gravity: ToastGravity.BOTTOM);
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
 
@@ -40,12 +47,11 @@ class RetrofitPageState extends State<RetrofitPage> {
               fontWeight: FontWeight.bold),
         ),
       ),
-      body: Center(
-        child: ConnectivityWidget(
-          onlineCallback: Call_API,
-          builder: (context, isOnline)  => Center(
-            child: build_api(context),
-          ),
+      body: ConnectivityWidget(
+        onlineCallback: Call_API,
+        offlineCallback: Show_Toast,
+        builder: (context, isOnline)  => Center(
+          child: build_api(context),
         ),
 
       ),
@@ -76,6 +82,7 @@ FutureBuilder<List<Post>> build_api(BuildContext context) {
     },
   );
 }
+
 ListView _buildPosts(BuildContext context, List<Post> posts) {
   return ListView.builder(
     itemCount: posts.length,
@@ -83,7 +90,6 @@ ListView _buildPosts(BuildContext context, List<Post> posts) {
     itemBuilder: (context, index) {
       print(posts[index].avatar);
       return Container(
-
           padding: EdgeInsets.all(3),
           height: 120,
           child: Card(
@@ -121,6 +127,7 @@ ListView _buildPosts(BuildContext context, List<Post> posts) {
 
 
 
+
 /*
 
 Future<bool> isInternet() async {
@@ -151,3 +158,7 @@ Future<bool> isInternet() async {
 
 
 */
+
+
+
+
