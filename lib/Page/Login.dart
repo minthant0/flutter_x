@@ -2,20 +2,19 @@ import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget{
 
-
   @override
   LoginPageState createState() => LoginPageState();
   
 }
-class LoginPageState extends State<LoginPage>{
 
+class LoginPageState extends State<LoginPage>{
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: new Scaffold(
-        /*body: SingleChildScrollView(
+        body: SingleChildScrollView(
             padding: EdgeInsets.only(left: 7.0, right: 7.0, top: 180.0),
             child: Card(
                 shape: RoundedRectangleBorder(
@@ -35,11 +34,11 @@ class LoginPageState extends State<LoginPage>{
                       Container(
                           margin: EdgeInsets.all(20),
                           child: TextField(
-                            controller: emailController,
+                           /* controller: emailController,
                             onChanged: (value) {
                               _myPreferences.user = value;
                               _myPreferences.commit();
-                            },
+                            },*/
                             decoration: InputDecoration(
                               border: OutlineInputBorder(),
                               labelText: 'User Name',
@@ -49,11 +48,11 @@ class LoginPageState extends State<LoginPage>{
                       Container(
                           margin: EdgeInsets.all(20),
                           child: TextField(
-                            controller: passwordController,
+                           /* controller: passwordController,
                             onChanged: (value) {
                               _myPreferences.password = value;
                               _myPreferences.commit();
-                            },
+                            },*/
                             decoration: InputDecoration(
                               border: OutlineInputBorder(),
                               labelText: 'User password',
@@ -69,7 +68,7 @@ class LoginPageState extends State<LoginPage>{
                           // Divider(),
 
                           RaisedButton(
-                            onPressed: userLogin,
+                           // onPressed: userLogin,
                             color: Colors.amberAccent,
                             textColor: Colors.white,
                             padding: EdgeInsets.fromLTRB(100, 18, 100, 18),
@@ -83,8 +82,8 @@ class LoginPageState extends State<LoginPage>{
                             textColor: Colors.black,
                             padding: EdgeInsets.fromLTRB(100, 18, 100, 18),
                             onPressed: () {
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterUser()
-                              ),);
+                             /* Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterUser()
+                              ),);*/
                             },
                             child: Text("New User click here",
                             ),
@@ -94,7 +93,7 @@ class LoginPageState extends State<LoginPage>{
                         ],
                       ),
                       Visibility(
-                          visible: visible,
+                         // visible: visible,
                           child: Container(
                               margin: EdgeInsets.only(bottom: 30),
                               child: CircularProgressIndicator()
@@ -105,10 +104,11 @@ class LoginPageState extends State<LoginPage>{
                 )
             )
 
-        ),*/
+        ),
       ),
     );
     throw UnimplementedError();
   }
 
 }
+

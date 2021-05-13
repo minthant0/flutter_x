@@ -77,6 +77,7 @@ FutureBuilder<List<Post>> build_api(BuildContext context) {
       }else{
         return Center(
           child: CircularProgressIndicator(),
+         // child: CupertinoActivityIndicator(),
         );
       }
     },
@@ -156,8 +157,8 @@ Future<bool> isInternet() async {
   }
 }
 
-
 */
+
 
 
 

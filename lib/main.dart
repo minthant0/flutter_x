@@ -28,10 +28,13 @@ import 'package:flutter_x/Obj/CardData.dart';
 import 'package:flutter_x/Page/LoginRegisterPage.dart';
 import 'package:flutter_x/Page/LoginUi.dart';
 import 'package:flutter_x/Page/RetrofitPage.dart';
+import 'package:flutter_x/Page/SendData.dart';
 import 'package:flutter_x/Page/SharedPreference.dart';
+import 'package:flutter_x/Page/TestUI.dart';
 import 'package:flutter_x/Page/google_map_picker.dart';
 import 'package:flutter_x/phone_auth/get_phone.dart';
 import 'package:flutter_x/themes/theme.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 
 import 'Page/ProductBox.dart';
@@ -79,14 +82,13 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
   var text = ["Card View","Login UI","Retrofit API","Shared Preference","Image Upload","Login and Register",
-               "CollapsingToolbar","Facebook Login","Firebase Notification","Firebase OTP","Google Map Picker",
-                "Sqlite Note","Drawer Navigation","Bottom Navigation","Image Slider","Internet Condition","Language","Image Picker"];
-
+              "CollapsingToolbar","Facebook Login","Firebase Notification","Firebase OTP","Google Map Picker",
+             "Sqlite Note","Drawer Navigation","Bottom Navigation","Image Slider","Internet Condition","Language","Image Picker",
+             "Login","Test UI","Send data"];
 
   @override
   void initState() {
     super.initState();
-
   }
 
 
@@ -127,7 +129,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
           debugShowCheckedModeBanner: false,
           home: new Scaffold(
-
               appBar: new AppBar(
                 title: new Text(
                   "FlutterX",
@@ -231,6 +232,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                     MaterialPageRoute(builder: (context) => InternetConditionPage()),
                                   );
                                 }else if(position==16){
+                                  Fluttertoast.showToast(msg: getTranslatedValue(context, 'language'),toastLength: Toast.LENGTH_SHORT, gravity: ToastGravity.BOTTOM);
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(builder: (context) => LngPage()),
@@ -239,6 +241,21 @@ class _MyHomePageState extends State<MyHomePage> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(builder: (context) => ImagePickerPage()),
+                                  );
+                                }else if(position==18){
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => LoginPage()),
+                                  );
+                                }else if(position==19){
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => TestUIPage()),
+                                  );
+                                }else if(position==20){
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => SendDataPage()),
                                   );
                                 }
                               },
@@ -254,3 +271,5 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
 }
+
+
