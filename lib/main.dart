@@ -28,6 +28,7 @@ import 'package:flutter_x/Page/Login.dart';
 import 'package:flutter_x/Obj/CardData.dart';
 import 'package:flutter_x/Page/LoginRegisterPage.dart';
 import 'package:flutter_x/Page/LoginUi.dart';
+import 'package:flutter_x/Page/QRcode.dart';
 import 'package:flutter_x/Page/RetrofitPage.dart';
 import 'package:flutter_x/Page/SendData.dart';
 import 'package:flutter_x/Page/SharedPreference.dart';
@@ -85,7 +86,7 @@ class _MyHomePageState extends State<MyHomePage> {
   var text = ["Card View","Login UI","Retrofit API","Shared Preference","Image Upload","Login and Register",
               "CollapsingToolbar","Facebook Login","Firebase Notification","Firebase OTP","Google Map Picker",
              "Sqlite Note","Drawer Navigation","Bottom Navigation","Image Slider","Internet Condition","Language","Image Picker",
-             "Login","Test UI","Send data","File Upload"];
+             "Login","Test UI","Send data","File Upload","QR code"];
 
   @override
   void initState() {
@@ -263,6 +264,11 @@ class _MyHomePageState extends State<MyHomePage> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(builder: (context) => FileUploadPage()),
+                                  );
+                                }else if(position==22){
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => QRcodePage()),
                                   );
                                 }
                               },
