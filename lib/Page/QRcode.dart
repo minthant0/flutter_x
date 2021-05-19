@@ -28,6 +28,7 @@ class QRcodePageState extends State<QRcodePage>{
     controller.resumeCamera();
   }
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -158,3 +159,5 @@ class QRcodePageState extends State<QRcodePage>{
   }
 
 }
+
+
