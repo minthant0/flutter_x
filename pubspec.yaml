@@ -56,6 +56,11 @@ dependencies:
   firebase_messaging: ^6.0.8
   google_fonts: ^0.3.9
   http: ^0.12.2
+  trust_fall: ^1.0.4
+  trust_location: ^2.0.13
+  geocoding: ^1.0.5
+  geolocator: ^5.3.1
+
   #flutter_uploader: ^1.2.1
   #tip_dialog: ^3.1.0
   #android_intent: ^0.3.7+7
@@ -103,6 +108,7 @@ flutter_icons:
   image_path: "assets/app-icon.png"
   android: true
   ios: true
+
 
 
 flutter_native_splash:
